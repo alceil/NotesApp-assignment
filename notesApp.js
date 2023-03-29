@@ -90,6 +90,26 @@ function showDeletedNotes(){
     notesDiv.innerHTML = notesHTML;
 }
 
+function showArchivedNotes(){
+    noteHeading.innerText = 'Archived Notes'
+    let notesHTML = '';
+    let archivedNotes = localStorage.getItem('archivedNotes');
+    if(archivedNotes === null){
+        notesDiv.innerHTML = ` `
+        return;
+    }else{
+        archivedNotes = JSON.parse(archivedNotes);
+    }
+    for(let i=0; i<archivedNotes.length; i++){
+        notesHTML += `<div class="note">
+                    <span class="title">${archivedNotes[i].title === "" ? 'Note' : archivedNotes[i].title}</span>
+                    <div class="text">${archivedNotes[i].text}</div>
+                </div>
+        `
+    }
+    notesDiv.innerHTML = notesHTML;
+}
+
 function deleteNote(ind){
     let notes = localStorage.getItem('notes');
     if(notes === null){
