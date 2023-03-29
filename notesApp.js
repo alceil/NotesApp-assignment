@@ -59,6 +59,7 @@ function showNotes(){
         <div class="btn-group">
         <button class="deleteNote" id=${i} onclick="deleteNote(${i})">Delete</button>
         <button class="editNote" id=${i} onclick="editNote(${i})">Edit</button>
+        <button class="archiveNote" id=${i} onclick="archiveNotes(${i})">Archive</button>
         </div>
                     <span class="title">${notes[i].title === "" ? 'Note' : notes[i].title}</span>
                     <div class="text">${notes[i].text}</div>
@@ -70,7 +71,6 @@ function showNotes(){
 
 function showDeletedNotes(){
     noteHeading.innerText = 'Deleted Notes'
-    console.log(noteIndex)
     let notesHTML = '';
     let deletedNotes = localStorage.getItem('deletedNotes');
     if(deletedNotes === null){
@@ -136,6 +136,29 @@ function editNote(ind){
    `
    controlDiv[0].innerHTML = notesHTML
     showNotes();
+}
+
+function archiveNotes(ind){
+    let notes = localStorage.getItem('notes');
+    if(notes === null){
+        notes = [];
+    }else{
+        notes = JSON.parse(notes);
+    }
+    let archivedNotes = localStorage.getItem('archivedNotes');
+    if(archivedNotes === null){
+        archivedNotes = [];
+    }else{
+        archivedNotes = JSON.parse(archivedNotes);
+    }
+    const noteObj = {
+        title: notes[ind].title,
+        text: notes[ind].text,
+    }
+    archivedNotes.push(noteObj);
+    localStorage.setItem('archivedNotes', JSON.stringify(archivedNotes));
+    alert('Notes Archived');
+
 }
 
 function edit(ind){
