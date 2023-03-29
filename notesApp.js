@@ -39,7 +39,10 @@ function showNotes(){
     }
     for(let i=0; i<notes.length; i++){
         notesHTML += `<div class="note">
-                    <button class="deleteNote" id=${i} onclick="deleteNote(${i})">Delete</button>
+        <div class="btn-group">
+        <button class="deleteNote" id=${i} onclick="deleteNote(${i})">Delete</button>
+        <button class="editNote" id=${i} onclick="editNote(${i})">Edit</button>
+        </div>
                     <span class="title">${notes[i].title === "" ? 'Note' : notes[i].title}</span>
                     <div class="text">${notes[i].text}</div>
                 </div>
@@ -59,5 +62,26 @@ function deleteNote(ind){
     localStorage.setItem('notes', JSON.stringify(notes));
     showNotes();
 }
+
+function editNote(ind){
+    let notes = localStorage.getItem('notes');
+    if(notes === null){
+        return;
+    }else{
+        notes = JSON.parse(notes);
+    }
+    const note = notes[ind];
+    addTitle.value = note.title;
+    addText.value = note.text;
+   const controlDiv = document.getElementsByClassName('control-btn-group');
+   console.log(controlDiv)
+   let notesHTML = '';
+   notesHTML = `<button class="editNote" onclick="edit(${ind})">Edit</button>
+   <button onclick="done()">Done</button>
+   `
+   controlDiv[0].innerHTML = notesHTML
+    showNotes();
+}
+
 addNoteButton.addEventListener('click', addNotes);
 

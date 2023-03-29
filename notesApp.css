@@ -48,6 +48,14 @@ button{
     background: transparent;
 }
 
-.deleteNote{
+.editNote{
+    margin-top: 6px;
+    }
+
+
+.btn-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     float: right;
 }
