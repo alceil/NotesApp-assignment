@@ -10,6 +10,8 @@ const notesHeadings = [
     {'heading':'Archived Notes', 'functionName':'showArchivedNotes()' },
 ];
 
+
+localStorage.clear();
 showNotes();
 renderHeadings();
 
@@ -47,9 +49,11 @@ function addNotes(){
 }
 
 function showNotes(){
+    noteHeading.innerText = 'My Notes'
     let notesHTML = '';
     let notes = localStorage.getItem('notes');
     if(notes === null){
+        notesDiv.innerHTML = ``;
         return;
     }else{
         notes = JSON.parse(notes);
@@ -74,6 +78,7 @@ function showDeletedNotes(){
     let notesHTML = '';
     let deletedNotes = localStorage.getItem('deletedNotes');
     if(deletedNotes === null){
+        notesDiv.innerHTML = '<h1 style="color:white;margin:auto;"> No Deleted Notes</h1>'
         return;
     }else{
         deletedNotes = JSON.parse(deletedNotes);
@@ -95,7 +100,7 @@ function showArchivedNotes(){
     let notesHTML = '';
     let archivedNotes = localStorage.getItem('archivedNotes');
     if(archivedNotes === null){
-        notesDiv.innerHTML = ` `
+        notesDiv.innerHTML = '<h1  style="color:white;margin:auto;"> No Archived Notes</h1>'
         return;
     }else{
         archivedNotes = JSON.parse(archivedNotes);
